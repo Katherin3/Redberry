@@ -2,6 +2,7 @@
 
 namespace App\DataTransferObjects;
 
+use Illuminate\Support\Str;
 use Spatie\DataTransferObject\DataTransferObject;
 use Spatie\DataTransferObject\Attributes\Strict;
 
@@ -14,7 +15,7 @@ class GetCandidatesDTO extends DataTransferObject
     {
         $data = [];
         foreach ($this->toArray() as $key => $value) {
-            $data[$key] = $value;
+            $data[Str::snake($key)] = $value;
         }
 
         return $data;
