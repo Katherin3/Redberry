@@ -33,17 +33,17 @@ class Candidate extends Model
         return $this->position;
     }
 
-    public function getMinSalary(): int
+    public function getMinSalary(): ?int
     {
         return $this->min_salary;
     }
 
-    public function getMaxSalary(): int
+    public function getMaxSalary(): ?int
     {
         return $this->max_salary;
     }
 
-    public function getLinkedinUrl(): int
+    public function getLinkedinUrl(): ?int
     {
         return $this->linkedin_url;
     }

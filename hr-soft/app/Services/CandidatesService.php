@@ -18,7 +18,7 @@ class CandidatesService
     ) {
     }
 
-    public function find(int $id): Candidate
+    public function find(int $id): ?Candidate
     {
         return $this->repository->find($id);
     }
