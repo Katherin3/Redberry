@@ -5,9 +5,19 @@
         "version": "0.1"
     },
     "paths": {
-        "/candidates": {
+        "/api/candidates": {
             "get": {
-                "operationId": "300e9269e7775e13534b30df89d91b1e",
+                "operationId": "67b4b336050bec33b41c72f9d4c0c97b",
+                "responses": {
+                    "200": {
+                        "description": "Display a listing of candidates."
+                    }
+                }
+            }
+        },
+        "/api/candidates/{id}": {
+            "get": {
+                "operationId": "7fc3698a8bafd10bdada51383d66e4c7",
                 "responses": {
                     "200": {
                         "description": "Display a listing of candidates."

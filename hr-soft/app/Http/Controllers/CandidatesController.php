@@ -7,19 +7,11 @@ use App\Http\Requests\GetCandidatesRequest;
 use App\Http\Requests\ShowCandidateRequest;
 use App\Http\Requests\UpdateCandidateRequest;
 use App\Http\Resources\CandidateResource;
-use App\Models\Candidate;
 use App\Services\CandidatesService;
 use Illuminate\Http\JsonResponse;
-use Ramsey\Collection\Collection;
 
 class CandidatesController extends Controller
 {
-    /**
-     * @OA\Get(
-     *     path="/candidates",
-     *     @OA\Response(response="200", description="Display a listing of candidates.")
-     * )
-     */
     public function index(GetCandidatesRequest $request, CandidatesService $candidatesService): JsonResponse
     {
         $items = $candidatesService->findMany($request->getDto());

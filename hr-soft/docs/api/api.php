@@ -11,17 +11,3 @@
  *     )
  * )
  */
-
-/**
- *  @OA\Server(
- *      url=L5_SWAGGER_CONST_HOST,
- *      description="API Server"
- *  )
- */
-
-/**
- * @OA\Tag(
- *     name="Authentication",
- *     description="Everything about Authentication",
- * )
- */
