@@ -9,8 +9,10 @@ use App\Interfaces\CandidatesRepositoryInterface;
 use App\Models\Candidate;
 use App\Models\CandidateSkill;
 use App\Models\CandidateStatus;
+use App\Models\Queries\Filters\CandidateStatusFilter;
 use App\Models\Status;
 use Illuminate\Database\Eloquent\Collection;
+use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
 
 class CandidatesRepository implements CandidatesRepositoryInterface
@@ -26,7 +28,11 @@ class CandidatesRepository implements CandidatesRepositoryInterface
 
     public function findMany(GetCandidatesDTO $dto): Collection
     {
-        $candidates = QueryBuilder::for($this->getModel())->get();
+        $candidates = QueryBuilder::for($this->getModel())
+            ->allowedFilters([
+                AllowedFilter::custom('status', new CandidateStatusFilter()),
+            ])
+            ->get();
 
         $candidates->load('status');
 

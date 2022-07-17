@@ -10,7 +10,8 @@ class GetCandidatesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'filter.status' => 'nullable|array',
+            'filter' => 'nullable|array',
+            'filter.status' => 'nullable|string',
         ];
     }
 
