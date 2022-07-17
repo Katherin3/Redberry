@@ -21,7 +21,7 @@ class UpdateCandidatesDTO extends DataTransferObject
 
     public ?int $maxSalary;
 
-    public ?array $skills = [];
+    public ?array $skillIds = [];
 
     public ?string $linkedinUrl;
 

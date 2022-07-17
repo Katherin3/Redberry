@@ -73,10 +73,6 @@
                                         "description": "Linkedin URL",
                                         "example": "www.linkeding.com/username"
                                     },
-                                    "statusId": {
-                                        "description": "Candidate status Id",
-                                        "example": "1"
-                                    },
                                     "skillIds": {
                                         "description": "Candidate Skill Ids",
                                         "example": "[1,2,3]"
@@ -105,6 +101,17 @@
                     "Candidates"
                 ],
                 "summary": "Get Candidate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Candidate id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Get Candidates"
@@ -161,10 +168,6 @@
                                     "linkedinUrl": {
                                         "description": "Linkedin URL",
                                         "example": "www.linkeding.com/username"
-                                    },
-                                    "statusId": {
-                                        "description": "Candidate status Id",
-                                        "example": "1"
                                     },
                                     "skillIds": {
                                         "description": "Candidate Skill Ids",

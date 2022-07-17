@@ -14,9 +14,9 @@ class UpdateCandidateRequest extends FormRequest
             'firstName' => 'required|string',
             'lastName' => 'required|string',
             'position' => 'required|string',
-            'minSalary' => 'nullable|integer|min:100',
-            'maxSalary' => 'nullable|integer|max:10000',
-            'skills' => 'nullable|array',
+            'minSalary' => 'nullable|integer|max:1000000|lt:maxSalary',
+            'maxSalary' => 'nullable|integer|max:1000000|gt:minSalary',
+            'skillIds' => 'nullable|array',
             'linkedinUrl' => 'nullable|string',
             'cv' => [
                 'nullable',

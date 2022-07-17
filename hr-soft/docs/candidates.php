@@ -26,6 +26,15 @@
  *     path="/api/candidates/{id}",
  *     tags={"Candidates"},
  *     summary="Get Candidate",
+ *     @OA\Parameter(
+ *         name="id",
+ *         description="Candidate id",
+ *         required=true,
+ *         in="path",
+ *         @OA\Schema(
+ *             type="integer",
+ *         ),
+ *     ),
  *     @OA\Response(
  *         response=200,
  *         description="Get Candidates",
@@ -90,14 +99,6 @@
  *                     example="www.linkeding.com/username",
  *                     @OA\Schema(
  *                         type="string"
- *                     )
- *                 ),
- *                 @OA\Property(
- *                     property="statusId",
- *                     description="Candidate status Id",
- *                     example="1",
- *                     @OA\Schema(
- *                         type="integer"
  *                     )
  *                 ),
  *                 @OA\Property(
@@ -190,14 +191,6 @@
  *                     example="www.linkeding.com/username",
  *                     @OA\Schema(
  *                         type="string"
- *                     )
- *                 ),
- *                 @OA\Property(
- *                     property="statusId",
- *                     description="Candidate status Id",
- *                     example="1",
- *                     @OA\Schema(
- *                         type="integer"
  *                     )
  *                 ),
  *                 @OA\Property(

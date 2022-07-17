@@ -11,6 +11,7 @@ class CandidateStatus extends Model
     use HasFactory;
     use SoftDeletes;
 
+
     public function getComment(): string
     {
         return $this->comment;

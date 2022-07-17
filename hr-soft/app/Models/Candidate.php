@@ -12,6 +12,7 @@ class Candidate extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    protected $guarded = [];
 
     public function getId(): int
     {
@@ -43,7 +44,7 @@ class Candidate extends Model
         return $this->max_salary;
     }
 
-    public function getLinkedinUrl(): ?int
+    public function getLinkedinUrl(): ?string
     {
         return $this->linkedin_url;
     }

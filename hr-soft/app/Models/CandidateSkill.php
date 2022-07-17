@@ -10,4 +10,5 @@ class CandidateSkill extends Model
 {
     use HasFactory;
     use SoftDeletes;
+    protected $guarded = [];
 }
