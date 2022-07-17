@@ -9,7 +9,7 @@ use Spatie\DataTransferObject\Attributes\Strict;
 #[Strict]
 class GetCandidateTimelineDTO extends DataTransferObject
 {
-    public int $id;
+    public int $candidateId;
 
     public function getValues(): array
     {

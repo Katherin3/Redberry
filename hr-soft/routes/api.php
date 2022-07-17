@@ -7,8 +7,8 @@ Route::resource('candidates', CandidatesController::class)
     ->only('index', 'store', 'update', 'show')
     ->parameter('candidates', 'id');
 
-Route::post('candidates/{id}/change-status', [CandidatesController::class, 'changeStatus']);
-Route::get('candidates/{id}/timeline', [CandidatesController::class, 'getTimeline']);
+Route::post('candidates/{candidateId}/change-status', [CandidatesController::class, 'changeStatus']);
+Route::get('candidates/{candidateId}/timeline', [CandidatesController::class, 'getTimeline']);
 
 
 

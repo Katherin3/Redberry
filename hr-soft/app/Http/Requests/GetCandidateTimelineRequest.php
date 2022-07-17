@@ -10,7 +10,7 @@ class GetCandidateTimelineRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'id' => 'required|integer|exists:candidates,id'
+            'candidateId' => 'required|integer|exists:candidates,id'
         ];
     }
 

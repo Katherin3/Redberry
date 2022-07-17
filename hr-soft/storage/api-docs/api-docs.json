@@ -190,6 +190,78 @@
                     }
                 }
             }
+        },
+        "/api/candidates/{candidateId}/change-status": {
+            "post": {
+                "tags": [
+                    "Candidates"
+                ],
+                "summary": "Cjange Candidates status",
+                "parameters": [
+                    {
+                        "name": "candidateId",
+                        "in": "path",
+                        "description": "Candidate Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    },
+                    {
+                        "name": "statusId",
+                        "in": "query",
+                        "description": "Status Id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "comment": {
+                                        "description": "comment",
+                                        "example": "reject reason"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Get Candidates"
+                    }
+                }
+            }
+        },
+        "/api/candidates/{candidateId}/timeline": {
+            "get": {
+                "tags": [
+                    "Candidates"
+                ],
+                "summary": "Get Candidate Timeline",
+                "parameters": [
+                    {
+                        "name": "candidateId",
+                        "in": "path",
+                        "description": "Candidate id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Get Candidates"
+                    }
+                }
+            }
         }
     },
     "security": [

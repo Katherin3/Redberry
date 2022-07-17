@@ -216,3 +216,69 @@
  *     ),
  * )
  */
+
+/**
+ * @OA\Post(
+ *     path="/api/candidates/{candidateId}/change-status",
+ *     tags={"Candidates"},
+ *     summary="Cjange Candidates status",
+ *     @OA\Parameter(
+ *         name="candidateId",
+ *         description="Candidate Id",
+ *         required=true,
+ *         in="path",
+ *         @OA\Schema(
+ *             type="integer",
+ *         ),
+ *     ),
+ *     @OA\Parameter(
+ *         name="statusId",
+ *         description="Status Id",
+ *         required=true,
+ *         in="query",
+ *         @OA\Schema(
+ *             type="integer",
+ *         ),
+ *     ),
+ *     @OA\RequestBody(
+ *         @OA\MediaType(
+ *             mediaType="application/json",
+ *             @OA\Schema(
+ *                 @OA\Property(
+ *                     property="comment",
+ *                     description="comment",
+ *                     example="reject reason",
+ *                     @OA\Schema(
+ *                         type="string"
+ *                     )
+ *                 ),
+ *             ),
+ *         ),
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Get Candidates",
+ *     ),
+ * )
+ */
+
+/**
+ * @OA\Get(
+ *     path="/api/candidates/{candidateId}/timeline",
+ *     tags={"Candidates"},
+ *     summary="Get Candidate Timeline",
+ *     @OA\Parameter(
+ *         name="candidateId",
+ *         description="Candidate id",
+ *         required=true,
+ *         in="path",
+ *         @OA\Schema(
+ *             type="integer",
+ *         ),
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="Get Candidates",
+ *     ),
+ * )
+ */
