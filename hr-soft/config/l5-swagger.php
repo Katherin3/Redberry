@@ -278,7 +278,9 @@ return [
          * Constants which can be used in annotations
          */
         'constants' => [
+            'L5_SWAGGER_CONST_TITLE' => env('APP_NAME', 'Laravel') . ' API',
             'L5_SWAGGER_CONST_HOST' => env('L5_SWAGGER_CONST_HOST', 'http://my-default-host.com'),
+            'L5_SWAGGER_CONST_DESCRIPTION' => env('APP_NAME', 'Laravel') . ' Services',
         ],
     ],
 ];

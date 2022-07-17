@@ -2,7 +2,7 @@
 
 /**
  * @OA\Info(
- *     title=L5_SWAGGER_CONST_TITLE,
+ *     title="L5_SWAGGER_CONST_TITLE",
  *     description=L5_SWAGGER_CONST_DESCRIPTION,
  *     version="1.0.0",
  *     @OA\License(

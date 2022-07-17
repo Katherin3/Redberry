@@ -1,29 +1,195 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "My First API",
-        "version": "0.1"
+        "title": "L5_SWAGGER_CONST_TITLE",
+        "description": "Laravel Services",
+        "license": {
+            "name": "Apache 2.0",
+            "url": "http://www.apache.org/licenses/LICENSE-2.0.html"
+        },
+        "version": "1.0.0"
     },
     "paths": {
         "/api/candidates": {
             "get": {
-                "operationId": "67b4b336050bec33b41c72f9d4c0c97b",
+                "tags": [
+                    "Candidates"
+                ],
+                "summary": "Get Candidates",
+                "parameters": [
+                    {
+                        "name": "filter[statusId]",
+                        "in": "path",
+                        "description": "Filter by status",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
-                        "description": "Display a listing of candidates."
+                        "description": "Get Candidates"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Candidates"
+                ],
+                "summary": "Create Candidate",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "firstName",
+                                    "lastName",
+                                    "position"
+                                ],
+                                "properties": {
+                                    "firstName": {
+                                        "description": "First name",
+                                        "example": "John"
+                                    },
+                                    "lastName": {
+                                        "description": "Last name",
+                                        "example": "Doe"
+                                    },
+                                    "position": {
+                                        "description": "Position",
+                                        "example": "developer"
+                                    },
+                                    "minSalary": {
+                                        "description": "Mnimun salary",
+                                        "example": "1000"
+                                    },
+                                    "maxSalary": {
+                                        "description": "Maximum salary",
+                                        "example": "50000"
+                                    },
+                                    "linkedinUrl": {
+                                        "description": "Linkedin URL",
+                                        "example": "www.linkeding.com/username"
+                                    },
+                                    "statusId": {
+                                        "description": "Candidate status Id",
+                                        "example": "1"
+                                    },
+                                    "skillIds": {
+                                        "description": "Candidate Skill Ids",
+                                        "example": "[1,2,3]"
+                                    },
+                                    "cv": {
+                                        "description": "Candidate CV",
+                                        "type": "file",
+                                        "example": ""
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "create candidate"
                     }
                 }
             }
         },
         "/api/candidates/{id}": {
             "get": {
-                "operationId": "7fc3698a8bafd10bdada51383d66e4c7",
+                "tags": [
+                    "Candidates"
+                ],
+                "summary": "Get Candidate",
                 "responses": {
                     "200": {
-                        "description": "Display a listing of candidates."
+                        "description": "Get Candidates"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Candidates"
+                ],
+                "summary": "Create Candidate",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Candidate id",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "multipart/form-data": {
+                            "schema": {
+                                "required": [
+                                    "firstName",
+                                    "lastName",
+                                    "position"
+                                ],
+                                "properties": {
+                                    "firstName": {
+                                        "description": "First name",
+                                        "example": "John"
+                                    },
+                                    "lastName": {
+                                        "description": "Last name",
+                                        "example": "Doe"
+                                    },
+                                    "position": {
+                                        "description": "Position",
+                                        "example": "developer"
+                                    },
+                                    "minSalary": {
+                                        "description": "Mnimun salary",
+                                        "example": "1000"
+                                    },
+                                    "maxSalary": {
+                                        "description": "Maximum salary",
+                                        "example": "50000"
+                                    },
+                                    "linkedinUrl": {
+                                        "description": "Linkedin URL",
+                                        "example": "www.linkeding.com/username"
+                                    },
+                                    "statusId": {
+                                        "description": "Candidate status Id",
+                                        "example": "1"
+                                    },
+                                    "skillIds": {
+                                        "description": "Candidate Skill Ids",
+                                        "example": "[1,2,3]"
+                                    },
+                                    "cv": {
+                                        "description": "Candidate CV",
+                                        "type": "file",
+                                        "example": ""
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "create candidate"
                     }
                 }
             }
         }
-    }
+    },
+    "security": [
+        []
+    ]
 }
