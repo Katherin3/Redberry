@@ -5,8 +5,10 @@ namespace App\Interfaces;
 use App\DataTransferObjects\CreateCandidatesDTO;
 use App\DataTransferObjects\CreateCandidateStatusDTO;
 use App\DataTransferObjects\GetCandidatesDTO;
+use App\DataTransferObjects\GetCandidateTimelineDTO;
 use App\DataTransferObjects\UpdateCandidatesDTO;
 use App\Models\Candidate;
+use App\Models\Status;
 use Illuminate\Database\Eloquent\Collection;
 
 interface CandidatesRepositoryInterface
@@ -20,4 +22,6 @@ interface CandidatesRepositoryInterface
     public function update(Candidate $candidate, UpdateCandidatesDTO $dto): Candidate;
 
     public function changeStatus(Candidate $candidate, CreateCandidateStatusDTO $dto): Candidate;
+
+    public function getTimeline(GetCandidateTimelineDTO $dto): Candidate;
 }

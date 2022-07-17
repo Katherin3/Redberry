@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\CreateCandidateRequest;
 use App\Http\Requests\CreateCandidateStatusRequest;
 use App\Http\Requests\GetCandidatesRequest;
+use App\Http\Requests\GetCandidateTimelineRequest;
 use App\Http\Requests\ShowCandidateRequest;
 use App\Http\Requests\UpdateCandidateRequest;
 use App\Http\Resources\CandidateResource;
@@ -44,6 +45,13 @@ class CandidatesController extends Controller
     public function changeStatus(CreateCandidateStatusRequest $request, CandidatesService $candidatesService): JsonResponse
     {
         $item = $candidatesService->changeStatus($request->getDto());
+
+        return (new CandidateResource($item))->response();
+    }
+
+    public function getTimeline(GetCandidateTimelineRequest $request, CandidatesService $candidatesService): JsonResponse
+    {
+        $item = $candidatesService->getTimeline($request->getDto());
 
         return (new CandidateResource($item))->response();
     }

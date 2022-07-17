@@ -5,10 +5,13 @@ namespace App\Services;
 use App\DataTransferObjects\CreateCandidatesDTO;
 use App\DataTransferObjects\CreateCandidateStatusDTO;
 use App\DataTransferObjects\GetCandidatesDTO;
+use App\DataTransferObjects\GetCandidateTimelineDTO;
 use App\DataTransferObjects\ShowCandidatesDTO;
 use App\DataTransferObjects\UpdateCandidatesDTO;
+use App\Http\Requests\GetCandidateTimelineRequest;
 use App\Interfaces\CandidatesRepositoryInterface;
 use App\Models\Candidate;
+use App\Models\Status;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
@@ -41,7 +44,18 @@ class CandidatesService
 
     public function create(CreateCandidatesDTO $dto): Candidate
     {
-        return $this->repository->create($dto);
+        $item = $this->repository->create($dto);
+
+        if(!empty($item)) {
+            $this->changeStatus(new CreateCandidateStatusDTO([
+                'candidateId' => $item->getId(),
+                'statusId' => Status::INITIAL_STATUS,
+            ]));
+
+            $item->load('status');
+        }
+
+        return $item;
     }
 
     public function update(UpdateCandidatesDTO $dto): Candidate
@@ -64,4 +78,16 @@ class CandidatesService
 
         return $this->repository->changeStatus($candidate, $dto);
     }
+
+    public function getTimeline(GetCandidateTimelineDTO $dto): Candidate
+    {
+        $candidate = $this->find($dto->id);
+
+        if(empty($candidate)) {
+            throw new ModelNotFoundException();
+        }
+
+        return $this->repository->getTimeline($dto);
+    }
+
 }

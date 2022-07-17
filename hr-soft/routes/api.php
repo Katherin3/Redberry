@@ -8,6 +8,7 @@ Route::resource('candidates', CandidatesController::class)
     ->parameter('candidates', 'id');
 
 Route::post('candidates/{id}/change-status', [CandidatesController::class, 'changeStatus']);
+Route::get('candidates/{id}/timeline', [CandidatesController::class, 'getTimeline']);
 
 
 

@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\DataTransferObjects\CreateCandidatesDTO;
 use App\DataTransferObjects\CreateCandidateStatusDTO;
 use App\DataTransferObjects\GetCandidatesDTO;
+use App\DataTransferObjects\GetCandidateTimelineDTO;
 use App\DataTransferObjects\UpdateCandidatesDTO;
 use App\Interfaces\CandidatesRepositoryInterface;
 use App\Models\Candidate;
@@ -42,16 +43,7 @@ class CandidatesRepository implements CandidatesRepositoryInterface
 
     public function create(CreateCandidatesDTO $dto): Candidate
     {
-        $candidate = QueryBuilder::for($this->getModel())->create($dto->except('skillIds', 'cv')->getValues());
-
-        CandidateStatus::create([
-            'candidate_id' => $candidate->getId(),
-            'status_id' => Status::INITIAL_STATUS,
-        ]);
-
-        $candidate->load('status');
-
-        return $candidate;
+        return QueryBuilder::for($this->getModel())->create($dto->except('skillIds', 'cv')->getValues());
     }
 
     public function update(Candidate $candidate, UpdateCandidatesDTO $dto): Candidate
@@ -76,6 +68,13 @@ class CandidatesRepository implements CandidatesRepositoryInterface
         $candidate->load('status');
 
         return $candidate;
+    }
+
+    public function getTimeline(GetCandidateTimelineDTO $dto): Candidate
+    {
+        return Candidate::whereHas('status', function($q) use ($dto) {
+            $q->where('candidate_id', $dto->id);
+        })->first()->load('status');
     }
 
     public function getModel(): Candidate
