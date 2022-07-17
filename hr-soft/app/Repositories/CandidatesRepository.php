@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\DataTransferObjects\CreateCandidatesDTO;
+use App\DataTransferObjects\CreateCandidateStatusDTO;
 use App\DataTransferObjects\GetCandidatesDTO;
 use App\DataTransferObjects\UpdateCandidatesDTO;
 use App\Interfaces\CandidatesRepositoryInterface;
@@ -56,6 +57,21 @@ class CandidatesRepository implements CandidatesRepositoryInterface
     public function update(Candidate $candidate, UpdateCandidatesDTO $dto): Candidate
     {
         $candidate->update($dto->except('skillIds', 'cv')->getValues());
+
+        $candidate->load('status');
+
+        return $candidate;
+    }
+
+    public function changeStatus(Candidate $candidate, CreateCandidateStatusDTO $dto): Candidate
+    {
+        CandidateStatus::updateOrCreate([
+            'candidate_id' => $dto->candidateId,
+            'status_id' => $dto->statusId,
+        ],
+        [
+            'comment' => $dto->comment
+        ]);
 
         $candidate->load('status');
 

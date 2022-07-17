@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateCandidateRequest;
+use App\Http\Requests\CreateCandidateStatusRequest;
 use App\Http\Requests\GetCandidatesRequest;
 use App\Http\Requests\ShowCandidateRequest;
 use App\Http\Requests\UpdateCandidateRequest;
@@ -36,6 +37,13 @@ class CandidatesController extends Controller
     public function update(UpdateCandidateRequest $request, CandidatesService $candidatesService): JsonResponse
     {
         $item = $candidatesService->update($request->getDto());
+
+        return (new CandidateResource($item))->response();
+    }
+
+    public function changeStatus(CreateCandidateStatusRequest $request, CandidatesService $candidatesService): JsonResponse
+    {
+        $item = $candidatesService->changeStatus($request->getDto());
 
         return (new CandidateResource($item))->response();
     }

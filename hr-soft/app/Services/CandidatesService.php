@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\DataTransferObjects\CreateCandidatesDTO;
+use App\DataTransferObjects\CreateCandidateStatusDTO;
 use App\DataTransferObjects\GetCandidatesDTO;
 use App\DataTransferObjects\ShowCandidatesDTO;
 use App\DataTransferObjects\UpdateCandidatesDTO;
@@ -51,5 +52,16 @@ class CandidatesService
         }
 
         return $this->repository->update($item, $dto);
+    }
+
+    public function changeStatus(CreateCandidateStatusDTO $dto): Candidate
+    {
+        $candidate = $this->find($dto->candidateId);
+
+        if(empty($candidate)) {
+            throw new ModelNotFoundException();
+        }
+
+        return $this->repository->changeStatus($candidate, $dto);
     }
 }

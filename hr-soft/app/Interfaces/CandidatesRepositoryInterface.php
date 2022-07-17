@@ -3,6 +3,7 @@
 namespace App\Interfaces;
 
 use App\DataTransferObjects\CreateCandidatesDTO;
+use App\DataTransferObjects\CreateCandidateStatusDTO;
 use App\DataTransferObjects\GetCandidatesDTO;
 use App\DataTransferObjects\UpdateCandidatesDTO;
 use App\Models\Candidate;
@@ -17,4 +18,6 @@ interface CandidatesRepositoryInterface
     public function create(CreateCandidatesDTO $dto): Candidate;
 
     public function update(Candidate $candidate, UpdateCandidatesDTO $dto): Candidate;
+
+    public function changeStatus(Candidate $candidate, CreateCandidateStatusDTO $dto): Candidate;
 }
