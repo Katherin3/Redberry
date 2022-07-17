@@ -14,14 +14,18 @@ class CandidatesRepository implements CandidatesRepositoryInterface
 {
     public function find(int $id): ?Candidate
     {
-        return QueryBuilder::for($this->getModel())->find($id);
+        $candidate =  QueryBuilder::for($this->getModel())->find($id);
+
+        $candidate->load('skills', 'statuses');
+
+        return $candidate;
     }
 
     public function findMany(GetCandidatesDTO $dto): Collection
     {
         $candidates = QueryBuilder::for($this->getModel())->get();
 
-        $candidates->load('skills');
+        $candidates->load('skills', 'statuses');
 
         return $candidates;
     }
@@ -30,7 +34,7 @@ class CandidatesRepository implements CandidatesRepositoryInterface
     {
         $candidate = QueryBuilder::for($this->getModel())->create($dto->getValues());
 
-        $candidate->load('skills');
+        $candidate->load('skills', 'statuses');
 
         return $candidate;
     }
@@ -39,7 +43,7 @@ class CandidatesRepository implements CandidatesRepositoryInterface
     {
         $candidate->update($dto->getValues());
 
-        $candidate->load('skills');
+        $candidate->load('skills', 'statuses');
 
         return $candidate;
     }

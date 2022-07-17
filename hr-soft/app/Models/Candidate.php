@@ -52,4 +52,9 @@ class Candidate extends Model
     {
         return $this->belongsToMany(Skill::class);
     }
+
+    public function Status(): BelongsToMany
+    {
+        return $this->belongsToMany(Status::class);
+    }
 }
