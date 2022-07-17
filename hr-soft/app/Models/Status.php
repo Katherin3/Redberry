@@ -12,6 +12,7 @@ class Status extends Model
     use HasFactory;
     use SoftDeletes;
     protected $guarded = [];
+    const INITIAL_STATUS = 1;
 
     public function getId(): int
     {
@@ -21,10 +22,5 @@ class Status extends Model
     public function getName(): string
     {
         return $this->name;
-    }
-
-    public function comment(): BelongsToMany
-    {
-        return $this->belongsToMany(CandidateStatus::class);
     }
 }

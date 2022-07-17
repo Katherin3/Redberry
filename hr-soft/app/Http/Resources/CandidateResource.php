@@ -23,7 +23,7 @@ class CandidateResource extends JsonResource
             'maxSalary' => $this->resource->getMaxSalary(),
             'linkedinUrl' => $this->resource->getLinkedinUrl(),
             'skills' => new SkillResource($this->whenLoaded('skills')),
-            'status' => new StatusResource($this->whenLoaded('statuses')),
+            'status' => StatusResource::collection($this->whenLoaded('status')),
         ];
     }
 }

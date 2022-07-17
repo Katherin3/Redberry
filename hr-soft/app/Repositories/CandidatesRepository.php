@@ -8,6 +8,8 @@ use App\DataTransferObjects\UpdateCandidatesDTO;
 use App\Interfaces\CandidatesRepositoryInterface;
 use App\Models\Candidate;
 use App\Models\CandidateSkill;
+use App\Models\CandidateStatus;
+use App\Models\Status;
 use Illuminate\Database\Eloquent\Collection;
 use Spatie\QueryBuilder\QueryBuilder;
 
@@ -17,7 +19,7 @@ class CandidatesRepository implements CandidatesRepositoryInterface
     {
         $candidate =  QueryBuilder::for($this->getModel())->find($id);
 
-//        $candidate->load('skills', 'statuses');
+        $candidate->load('status');
 
         return $candidate;
     }
@@ -26,7 +28,7 @@ class CandidatesRepository implements CandidatesRepositoryInterface
     {
         $candidates = QueryBuilder::for($this->getModel())->get();
 
-//        $candidates->load('skills', 'statuses');
+        $candidates->load('status');
 
         return $candidates;
     }
@@ -35,7 +37,12 @@ class CandidatesRepository implements CandidatesRepositoryInterface
     {
         $candidate = QueryBuilder::for($this->getModel())->create($dto->except('skillIds', 'cv')->getValues());
 
-//        $candidate->load('skills', 'statuses');
+        CandidateStatus::create([
+            'candidate_id' => $candidate->getId(),
+            'status_id' => Status::INITIAL_STATUS,
+        ]);
+
+        $candidate->load('status');
 
         return $candidate;
     }
@@ -44,7 +51,7 @@ class CandidatesRepository implements CandidatesRepositoryInterface
     {
         $candidate->update($dto->except('skillIds', 'cv')->getValues());
 
-//        $candidate->load('skills', 'statuses');
+        $candidate->load('status');
 
         return $candidate;
     }

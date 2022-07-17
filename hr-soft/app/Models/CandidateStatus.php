@@ -11,6 +11,7 @@ class CandidateStatus extends Model
     use HasFactory;
     use SoftDeletes;
     protected $guarded = [];
+    protected $table = 'candidate_status';
 
     public function getComment(): string
     {
