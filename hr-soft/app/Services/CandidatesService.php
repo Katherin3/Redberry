@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\DataTransferObjects\CreateCandidatesDTO;
+use App\DataTransferObjects\CreateCandidateSkillsDTO;
 use App\DataTransferObjects\CreateCandidateStatusDTO;
 use App\DataTransferObjects\GetCandidatesDTO;
 use App\DataTransferObjects\GetCandidateTimelineDTO;
@@ -52,7 +53,14 @@ class CandidatesService
                 'statusId' => Status::INITIAL_STATUS,
             ]));
 
-            $item->load('status');
+            if($dto->skillIds) {
+                $this->attachCandidateSkills($item, new CreateCandidateSkillsDTO([
+                    'candidateId' => $item->getId(),
+                    'skillIds' => $dto->skillIds,
+                ]));
+            }
+
+            $item->load('status', 'skill');
         }
 
         return $item;
@@ -65,7 +73,18 @@ class CandidatesService
             throw new ModelNotFoundException();
         }
 
-        return $this->repository->update($item, $dto);
+        $candidate = $this->repository->update($item, $dto);
+
+        if($dto->skillIds) {
+            $this->attachCandidateSkills($item, new CreateCandidateSkillsDTO([
+                'candidateId' => $candidate->getId(),
+                'skillIds' => $dto->skillIds,
+            ]));
+
+            $item->load('skill');
+        }
+
+        return $candidate;
     }
 
     public function changeStatus(CreateCandidateStatusDTO $dto): Candidate
@@ -81,13 +100,24 @@ class CandidatesService
 
     public function getTimeline(GetCandidateTimelineDTO $dto): Candidate
     {
-        $candidate = $this->find($dto->id);
+        $candidate = $this->find($dto->candidateId);
 
         if(empty($candidate)) {
             throw new ModelNotFoundException();
         }
 
         return $this->repository->getTimeline($dto);
+    }
+
+    public function attachCandidateSkills(Candidate $candidate, CreateCandidateSkillsDTO $dto): void
+    {
+        $candidate = $this->find($dto->candidateId);
+
+        if(empty($candidate)) {
+            throw new ModelNotFoundException();
+        }
+
+        $this->repository->attachSkills($candidate, $dto);
     }
 
 }

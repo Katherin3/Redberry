@@ -3,16 +3,15 @@
 namespace App\Repositories;
 
 use App\DataTransferObjects\CreateCandidatesDTO;
+use App\DataTransferObjects\CreateCandidateSkillsDTO;
 use App\DataTransferObjects\CreateCandidateStatusDTO;
 use App\DataTransferObjects\GetCandidatesDTO;
 use App\DataTransferObjects\GetCandidateTimelineDTO;
 use App\DataTransferObjects\UpdateCandidatesDTO;
 use App\Interfaces\CandidatesRepositoryInterface;
 use App\Models\Candidate;
-use App\Models\CandidateSkill;
 use App\Models\CandidateStatus;
 use App\Models\Queries\Filters\CandidateStatusFilter;
-use App\Models\Status;
 use Illuminate\Database\Eloquent\Collection;
 use Spatie\QueryBuilder\AllowedFilter;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -23,7 +22,7 @@ class CandidatesRepository implements CandidatesRepositoryInterface
     {
         $candidate =  QueryBuilder::for($this->getModel())->find($id);
 
-        $candidate->load('status');
+        $candidate->load('status', 'skill');
 
         return $candidate;
     }
@@ -36,7 +35,7 @@ class CandidatesRepository implements CandidatesRepositoryInterface
             ])
             ->get();
 
-        $candidates->load('status');
+        $candidates->load('status', 'skill');
 
         return $candidates;
     }
@@ -73,8 +72,13 @@ class CandidatesRepository implements CandidatesRepositoryInterface
     public function getTimeline(GetCandidateTimelineDTO $dto): Candidate
     {
         return Candidate::whereHas('status', function($q) use ($dto) {
-            $q->where('candidate_id', $dto->id);
+            $q->where('candidate_id', $dto->candidateId);
         })->first()->load('status');
+    }
+
+    public function attachSkills(Candidate $candidate, CreateCandidateSkillsDTO $dto): void
+    {
+        $candidate->skill()->sync($dto->skillIds);
     }
 
     public function getModel(): Candidate

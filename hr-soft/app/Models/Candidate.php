@@ -50,7 +50,7 @@ class Candidate extends Model
         return $this->linkedin_url;
     }
 
-    public function skills(): BelongsToMany
+    public function skill(): BelongsToMany
     {
         return $this->belongsToMany(Skill::class);
     }

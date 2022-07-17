@@ -3,6 +3,7 @@
 namespace App\Interfaces;
 
 use App\DataTransferObjects\CreateCandidatesDTO;
+use App\DataTransferObjects\CreateCandidateSkillsDTO;
 use App\DataTransferObjects\CreateCandidateStatusDTO;
 use App\DataTransferObjects\GetCandidatesDTO;
 use App\DataTransferObjects\GetCandidateTimelineDTO;
@@ -24,4 +25,6 @@ interface CandidatesRepositoryInterface
     public function changeStatus(Candidate $candidate, CreateCandidateStatusDTO $dto): Candidate;
 
     public function getTimeline(GetCandidateTimelineDTO $dto): Candidate;
+
+    public function attachSkills(Candidate $candidate, CreateCandidateSkillsDTO $dto): void;
 }
