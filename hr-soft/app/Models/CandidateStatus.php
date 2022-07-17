@@ -10,7 +10,7 @@ class CandidateStatus extends Model
 {
     use HasFactory;
     use SoftDeletes;
-
+    protected $guarded = [];
 
     public function getComment(): string
     {

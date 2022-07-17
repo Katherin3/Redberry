@@ -19,7 +19,7 @@ class StatusSeeder extends Seeder
         ];
 
         foreach ($statuses as $status) {
-            Status::create(['name' => $status['name']]);
+            Status::updateOrCreate(['name' => $status['name']]);
         }
     }
 }
