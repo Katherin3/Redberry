@@ -57,6 +57,7 @@ class Candidate extends Model
 
     public function status(): BelongsToMany
     {
-        return $this->belongsToMany(Status::class);
+        return $this->belongsToMany(Status::class)
+            ->withPivot('comment');
     }
 }

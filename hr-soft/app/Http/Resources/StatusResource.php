@@ -20,7 +20,7 @@ class StatusResource extends JsonResource
         return [
             'id'   => $this->resource->getId(),
             'name'   => $this->resource->getName(),
-            'comment' => $this->resource->comment,
+            'comment' => $this->resource->pivot->comment
         ];
     }
 }
