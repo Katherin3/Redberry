@@ -18,13 +18,18 @@ class UpdateCandidateRequest extends FormRequest
             'maxSalary' => 'nullable|integer|max:1000000|gt:minSalary',
             'skillIds' => 'nullable|array',
             'linkedinUrl' => 'nullable|string',
-            'cv' => [
-                'nullable',
+            'files'     => 'nullable|array|max:20',
+            'files.*'   => [
+                'required',
                 'file',
-                'mimetypes: application/pdf',
-                'max: 100000',
-            ]
+                'max:2048',
+            ],
         ];
+    }
+
+    public function prepareForValidation()
+    {
+        $this->merge($this->route()->parameters());
     }
 
     public function getDto(): UpdateCandidatesDTO

@@ -14,6 +14,11 @@ class ShowCandidateRequest extends FormRequest
         ];
     }
 
+    public function prepareForValidation()
+    {
+        $this->merge($this->route()->parameters());
+    }
+
     public function getDto(): ShowCandidatesDTO
     {
         return new ShowCandidatesDTO($this->validated());

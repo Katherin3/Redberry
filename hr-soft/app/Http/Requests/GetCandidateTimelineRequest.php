@@ -14,6 +14,11 @@ class GetCandidateTimelineRequest extends FormRequest
         ];
     }
 
+    public function prepareForValidation()
+    {
+        $this->merge($this->route()->parameters());
+    }
+
     public function getDto(): GetCandidateTimelineDTO
     {
         return new GetCandidateTimelineDTO($this->validated());

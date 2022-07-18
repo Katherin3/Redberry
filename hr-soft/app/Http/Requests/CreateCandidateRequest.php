@@ -17,13 +17,21 @@ class CreateCandidateRequest extends FormRequest
             'maxSalary' => 'nullable|integer|max:1000000|gt:minSalary',
             'skillIds' => 'nullable|array',
             'linkedinUrl' => 'nullable|string',
-            'files'     => 'required|array|max:20',
+            'files'     => 'nullable|array|max:20',
             'files.*'   => [
                 'required',
                 'file',
                 'max:2048',
             ],
         ];
+    }
+
+    public function prepareForValidation()
+    {
+        $this->merge($this->route()->parameters());
+
+        parent::prepareForValidation();
+
     }
 
     public function getDto(): CreateCandidatesDTO

@@ -50,7 +50,7 @@
  *     @OA\RequestBody(
  *         required=true,
  *         @OA\MediaType(
- *             mediaType="multipart/form-data",
+ *             mediaType="application/json",
  *             @OA\Schema(
  *                 required={"firstName","lastName","position"},
  *                 @OA\Property(
@@ -110,10 +110,12 @@
  *                     )
  *                 ),
  *                 @OA\Property(
- *                     property="cv",
+ *                     property="files",
  *                     description="Candidate CV",
  *                     example="",
- *                     type="file"
+ *                     @OA\Schema(
+ *                         type="array"
+ *                     )
  *                 ),
  *             ),
  *         ),
@@ -142,7 +144,7 @@
  *     @OA\RequestBody(
  *         required=true,
  *         @OA\MediaType(
- *             mediaType="multipart/form-data",
+ *             mediaType="application/json",
  *             @OA\Schema(
  *                 required={"firstName","lastName","position"},
  *                 @OA\Property(
@@ -202,10 +204,12 @@
  *                     )
  *                 ),
  *                 @OA\Property(
- *                     property="cv",
+ *                     property="files",
  *                     description="Candidate CV",
  *                     example="",
- *                     type="file"
+ *                     @OA\Schema(
+ *                         type="array"
+ *                     )
  *                 ),
  *             ),
  *         ),

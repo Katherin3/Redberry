@@ -16,6 +16,11 @@ class CreateCandidateStatusRequest extends FormRequest
         ];
     }
 
+    public function prepareForValidation()
+    {
+        $this->merge($this->route()->parameters());
+    }
+
     public function getDto(): CreateCandidateStatusDTO
     {
         return new CreateCandidateStatusDTO($this->validated());

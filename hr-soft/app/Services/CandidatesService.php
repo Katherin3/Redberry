@@ -88,6 +88,10 @@ class CandidatesService
                 'skillIds' => $dto->skillIds,
             ]));
 
+            if($dto->files) {
+                $this->uploadMedia($item->getId(), $dto->files);
+            }
+
             $item->load('skill');
         }
 
