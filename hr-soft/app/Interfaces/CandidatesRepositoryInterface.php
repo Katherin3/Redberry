@@ -27,4 +27,6 @@ interface CandidatesRepositoryInterface
     public function getTimeline(GetCandidateTimelineDTO $dto): Candidate;
 
     public function attachSkills(Candidate $candidate, CreateCandidateSkillsDTO $dto): void;
+
+    public function uploadMedia($candidateId, $uploadedFile): void;
 }

@@ -60,4 +60,9 @@ class Candidate extends Model
         return $this->belongsToMany(Status::class)
             ->withPivot('comment');
     }
+
+    public function files(): HasMany
+    {
+        return $this->hasMany(Media::class);
+    }
 }

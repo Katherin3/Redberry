@@ -23,7 +23,7 @@ class CreateCandidatesDTO extends DataTransferObject
 
     public ?string $linkedinUrl;
 
-    public ?array $cv;
+    public ?array $files;
 
     public function getValues(): array
     {

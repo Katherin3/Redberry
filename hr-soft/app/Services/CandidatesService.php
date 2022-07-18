@@ -12,9 +12,12 @@ use App\DataTransferObjects\UpdateCandidatesDTO;
 use App\Http\Requests\GetCandidateTimelineRequest;
 use App\Interfaces\CandidatesRepositoryInterface;
 use App\Models\Candidate;
+use App\Models\Media;
 use App\Models\Status;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
+use Illuminate\Support\Facades\Storage;
+use phpDocumentor\Reflection\Types\Void_;
 
 class CandidatesService
 {
@@ -58,6 +61,10 @@ class CandidatesService
                     'candidateId' => $item->getId(),
                     'skillIds' => $dto->skillIds,
                 ]));
+            }
+
+            if($dto->files) {
+                $this->uploadMedia($item->getId(), $dto->files);
             }
 
             $item->load('status', 'skill');
@@ -120,4 +127,17 @@ class CandidatesService
         $this->repository->attachSkills($candidate, $dto);
     }
 
+    public function uploadMedia($candidateId, $file): void
+    {
+        $uploadedFile = $file['cv'];
+        $filename = time().' - '.$uploadedFile->getClientOriginalName();
+
+        Storage::disk('local')->putFileAs(
+            'public',
+            $uploadedFile,
+            $filename
+        );
+
+        $this->repository->uploadMedia($candidateId, $uploadedFile);
+    }
 }

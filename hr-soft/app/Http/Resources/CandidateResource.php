@@ -24,6 +24,7 @@ class CandidateResource extends JsonResource
             'linkedinUrl' => $this->resource->getLinkedinUrl(),
             'skills' => SkillResource::collection($this->whenLoaded('skill')),
             'status' => StatusResource::collection($this->whenLoaded('status')),
+            'files' => $this->resource->files,
         ];
     }
 }

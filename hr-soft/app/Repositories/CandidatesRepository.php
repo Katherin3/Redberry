@@ -11,6 +11,7 @@ use App\DataTransferObjects\UpdateCandidatesDTO;
 use App\Interfaces\CandidatesRepositoryInterface;
 use App\Models\Candidate;
 use App\Models\CandidateStatus;
+use App\Models\Media;
 use App\Models\Queries\Filters\CandidateStatusFilter;
 use Illuminate\Database\Eloquent\Collection;
 use Spatie\QueryBuilder\AllowedFilter;
@@ -42,12 +43,12 @@ class CandidatesRepository implements CandidatesRepositoryInterface
 
     public function create(CreateCandidatesDTO $dto): Candidate
     {
-        return QueryBuilder::for($this->getModel())->create($dto->except('skillIds', 'cv')->getValues());
+        return QueryBuilder::for($this->getModel())->create($dto->except('skillIds', 'files')->getValues());
     }
 
     public function update(Candidate $candidate, UpdateCandidatesDTO $dto): Candidate
     {
-        $candidate->update($dto->except('skillIds', 'cv')->getValues());
+        $candidate->update($dto->except('skillIds', 'files')->getValues());
 
         $candidate->load('status');
 
@@ -79,6 +80,19 @@ class CandidatesRepository implements CandidatesRepositoryInterface
     public function attachSkills(Candidate $candidate, CreateCandidateSkillsDTO $dto): void
     {
         $candidate->skill()->sync($dto->skillIds);
+    }
+
+    public function uploadMedia($candidateId, $uploadedFile): void
+    {
+        $fileName = time().' - '.$uploadedFile->getClientOriginalName();
+        $type = $uploadedFile->getMimeType();
+
+        Media::create([
+            'candidate_id' => $candidateId,
+            'name' => $fileName,
+            'path' => public_path('storage'),
+            'type' => $type
+        ]);
     }
 
     public function getModel(): Candidate
