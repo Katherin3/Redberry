@@ -70,11 +70,9 @@ class CandidatesRepository implements CandidatesRepositoryInterface
         return $candidate;
     }
 
-    public function getTimeline(GetCandidateTimelineDTO $dto): Candidate
+    public function getTimeline(Candidate $candidate): Collection
     {
-        return Candidate::whereHas('status', function($q) use ($dto) {
-            $q->where('candidate_id', $dto->candidateId);
-        })->first()->load('status');
+        return $candidate->status()->get();
     }
 
     public function attachSkills(Candidate $candidate, CreateCandidateSkillsDTO $dto): void

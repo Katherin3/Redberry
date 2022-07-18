@@ -9,6 +9,7 @@ use App\Http\Requests\GetCandidateTimelineRequest;
 use App\Http\Requests\ShowCandidateRequest;
 use App\Http\Requests\UpdateCandidateRequest;
 use App\Http\Resources\CandidateResource;
+use App\Http\Resources\StatusResource;
 use App\Services\CandidatesService;
 use Illuminate\Http\JsonResponse;
 
@@ -53,6 +54,6 @@ class CandidatesController extends Controller
     {
         $item = $candidatesService->getTimeline($request->getDto());
 
-        return (new CandidateResource($item))->response();
+        return StatusResource::collection($item)->response();
     }
 }

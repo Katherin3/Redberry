@@ -2,9 +2,9 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Status extends Model
@@ -22,5 +22,10 @@ class Status extends Model
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function getCreatedAt(): string
+    {
+        return Carbon::parse($this->created_at)->toDateTimeString();
     }
 }

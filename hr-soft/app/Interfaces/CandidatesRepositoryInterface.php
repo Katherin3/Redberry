@@ -24,7 +24,7 @@ interface CandidatesRepositoryInterface
 
     public function changeStatus(Candidate $candidate, CreateCandidateStatusDTO $dto): Candidate;
 
-    public function getTimeline(GetCandidateTimelineDTO $dto): Candidate;
+    public function getTimeline(Candidate $candidate): Collection;
 
     public function attachSkills(Candidate $candidate, CreateCandidateSkillsDTO $dto): void;
 

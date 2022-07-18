@@ -109,7 +109,7 @@ class CandidatesService
         return $this->repository->changeStatus($candidate, $dto);
     }
 
-    public function getTimeline(GetCandidateTimelineDTO $dto): Candidate
+    public function getTimeline(GetCandidateTimelineDTO $dto): Collection
     {
         $candidate = $this->find($dto->candidateId);
 
@@ -117,7 +117,7 @@ class CandidatesService
             throw new ModelNotFoundException();
         }
 
-        return $this->repository->getTimeline($dto);
+        return $this->repository->getTimeline($candidate);
     }
 
     public function attachCandidateSkills(Candidate $candidate, CreateCandidateSkillsDTO $dto): void
